@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Airflow Studio — apartment air flow simulator</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="logo"></span>Airflow Studio</div>
+  <div class="actions">
+    <button id="bPlay" class="btn">⏸ Pause</button>
+    <button id="bReset" class="btn" title="Zero the velocity and temperature fields">↺ Reset flow</button>
+    <button id="bUndo" class="btn" title="Ctrl+Z">⟲ Undo</button>
+    <span class="sep"></span>
+    <button id="bDemo" class="btn">Load demo flat</button>
+    <button id="bClear" class="btn">New / clear</button>
+    <button id="bSave" class="btn">Save…</button>
+    <button id="bLoad" class="btn">Open…</button>
+    <input type="file" id="fileIn" accept=".json,application/json" hidden>
+  </div>
+  <div class="spacer"></div>
+  <div id="status" class="status"></div>
+</header>
+
+<div class="app">
+  <nav id="tools" class="tools"></nav>
+
+  <main class="stage" id="stage">
+    <canvas id="cv"></canvas>
+    <div id="hint" class="hint"></div>
+    <div id="readout" class="readout"></div>
+    <div id="legend" class="legend"></div>
+  </main>
+
+  <aside class="panel">
+    <section class="card">
+      <h3>Incoming air (wind)</h3>
+      <div class="dialrow">
+        <canvas id="dial" width="112" height="112" title="Drag to where the wind comes FROM"></canvas>
+        <div class="dialtxt"><div id="dialLabel" class="big"></div><div class="muted">Drag the dial toward the side the wind comes from.</div></div>
+      </div>
+      <div id="envCtl"></div>
+    </section>
+
+    <section class="card">
+      <h3>View</h3>
+      <div class="seg" id="overlaySeg"></div>
+      <div id="viewCtl"></div>
+    </section>
+
+    <section class="card">
+      <h3 id="selTitle">Selection</h3>
+      <div id="selection"></div>
+    </section>
+
+    <section class="card">
+      <h3>Results <span class="muted" id="roomNote"></span></h3>
+      <div id="metrics" class="metrics"></div>
+    </section>
+
+    <section class="card">
+      <h3>Fan placement optimizer</h3>
+      <p class="muted small">Simulates a standing fan at hundreds of spots and angles and scores air speed comfort in your comfort zones (or the whole indoor area). With an AC present it also rewards cooling.</p>
+      <div class="row"><button id="bOpt" class="btn primary">Find best fan spot</button><button id="bOptClear" class="btn" hidden>Clear</button></div>
+      <div class="bar" id="optBar" hidden><i id="optFill"></i></div>
+      <div id="optRes"></div>
+    </section>
+  </aside>
+</div>
+<script src="sim.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
